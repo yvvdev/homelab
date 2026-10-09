@@ -1,0 +1,16 @@
+# Секреты — никогда в Git
+*.key
+*.pem
+id_*
+!id_*.pub
+.env
+*.tfvars
+*.tfstate
+*.tfstate.*
+kubeconfig*
+
+# Служебные файлы
+.terraform/
+*.log
+.DS_Store
+Thumbs.db
