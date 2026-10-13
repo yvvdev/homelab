@@ -2,7 +2,7 @@
 
 > Файл-«память» проекта для ИИ-ассистентов (Claude в чате, Claude Code, VS Code).
 > Лежит в корне репозитория `homelab` — Claude Code читает его автоматически. В новом чате — прикрепить этот файл (и при необходимости папку `docs/`).
-> **Версия документации: v3 (2026-10-09).**
+> **Версия документации: v4 (2026-10-13).**
 
 ---
 
@@ -39,6 +39,7 @@
 - **Сервер `proxmox`:** HUANAN X79, Xeon E5-1660 v2, 16 GB DDR3 (4×4), 1 × HDD Seagate ST2000DM001 2 TB (SMART OK, ~19,5 тыс. ч), Realtek RTL8111, GTX 550 Ti. **Proxmox VE 9.2.21**, ядро 7.0.14 (Debian 13), репозитории no-subscription. LVM-thin (`local` 96 GB, `local-lvm` 1,7 TB). Сеть 192.168.1.0/24, хост **192.168.1.100** на мосту `vmbr0`, шлюз .1. Физический доступ к серверу есть.
 - **Доступ:** SSH только по ключам (`ssh pve` из WSL; ключи Windows и WSL в `authorized_keys`). Веб-интерфейс: локально — пароль + TOTP; снаружи — Cloudflare Access (код на почту) → туннель `proxmox-tunnel` → пароль + TOTP. `cloudflared` на хосте, стартует после `network-online.target`.
 - **VM:** только 100 `wVM` (Windows 10, тест, 1×4 vCPU, 4 GB, выключена).
+- **Секреты:** KeePassXC (`homelab.kdbx`), TOTP — в приложении на телефоне. 2FA включена на GitHub, Cloudflare, Proxmox.
 - **Рабочая станция:** ноутбук i5-13500H, 24 GB RAM. Windows 11 Pro (официальный ISO) на внешнем USB SSD, учётка `Yarik`. WSL2: Ubuntu 24.04, пользователь `yarik`, проекты в `~/projects`. VS Code связан с WSL.
 
 ## Правила работы с сервером
@@ -53,7 +54,9 @@
 | № | Этап | Статус |
 |---|---|---|
 | 0–4 | Чистая ОС, базовое ПО, GitHub + SSH, WSL2, VS Code | ✅ |
-| 5 | Репозиторий `homelab`: коммиты v1, v2 созданы локально; **push не прошёл** (`Repository not found` — переименовать репозиторий на GitHub в `homelab`), затем `git push origin main --tags` | 🔄 **ближайшее** |
+| 5 | Репозиторий `yvvdev/homelab` на GitHub, документация v1–v3 опубликована, теги | ✅ |
+| 5a | 2FA GitHub и Cloudflare, менеджер паролей KeePassXC, единое имя в Git | ✅ 2026-10-13 |
+| 5b | **Основы Linux** — учебный блок на WSL: файловая система, права, процессы и службы, текст и конвейеры | ⬜ **следующий** |
 | 6 | Установочные скрипты рабочей станции (winget + apt) | ⬜ |
 | 7 | Docker, Terraform/OpenTofu, Ansible, kubectl, helm, k9s | ⬜ |
 | 8 | Образ SSD, BitLocker | ⬜ |
@@ -66,9 +69,6 @@
 
 ## Открытые вопросы
 
-- `user.name` в Git на Windows = `yvvdev`, в WSL = «Yaroslav Ivoylov» — привести к одному.
-- 2FA на GitHub и Cloudflare — проверить.
-- Менеджер паролей; где хранятся коды восстановления TOTP.
 - Объём внешнего SSD.
 - Носитель и схема бэкапов сервера.
 - Удалённый SSH вне дома (Cloudflare Access for SSH или Tailscale).

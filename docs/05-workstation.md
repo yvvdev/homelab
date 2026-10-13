@@ -1,6 +1,6 @@
 # 5. Рабочая станция («ОС-инструмент»)
 
-> **Версия:** v1 · **Дата:** 2026-10-08 · **Статус:** действующий
+> **Версия:** v4 · **Дата:** 2026-10-13 · **Статус:** действующий
 
 ## 5.1. Операционная система
 
@@ -26,6 +26,7 @@
 | Git for Windows | 2.55.0 | `winget` (`Git.Git`) | Контроль версий |
 | Visual Studio Code | 1.140.0 | `winget` (`Microsoft.VisualStudioCode`) | Редактор |
 | 7-Zip | — | `winget` (`7zip.7zip`) | Архиватор |
+| KeePassXC | — | `winget` (`KeePassXCTeam.KeePassXC`) | Менеджер паролей (с 2026-10-13) |
 | Windows Terminal | — | В составе Windows | Терминал |
 | OpenSSH Client | — | В составе Windows | SSH-клиент, `ssh-agent` (автозапуск) |
 
@@ -36,7 +37,7 @@
 | WSL | 3.0.1.0, ядро 6.18.40.1-1 |
 | Дистрибутив | Ubuntu 24.04 LTS |
 | Пользователь | `yarik` |
-| Каталог проектов | `~/projects` |
+| Каталог проектов | `~/projects` (репозиторий `~/projects/homelab`) |
 
 **Установленные пакеты (apt):** git, curl, wget, unzip, zip, jq, tree, htop, tmux, bash-completion, dnsutils, net-tools, ca-certificates, gnupg, keychain, build-essential.
 
@@ -46,7 +47,7 @@
 
 | Параметр | Windows | WSL |
 |---|---|---|
-| `user.name` | `yvvdev` | `Yaroslav Ivoylov` |
+| `user.name` | `Yaroslav Ivoylov` | `Yaroslav Ivoylov` |
 | `user.email` | настроен | настроен |
 | `init.defaultBranch` | `main` | `main` |
 | `core.editor` | `code --wait` | `code --wait` |
@@ -57,11 +58,13 @@
 
 | Расширение | Где | Статус |
 |---|---|---|
-| Remote - WSL | Windows | ⏳ этап 4 |
-| Remote - SSH | Windows | ⏳ этап 4 |
-| YAML (Red Hat) | Windows + WSL | ⏳ этап 4 |
-| GitLens | Windows + WSL | ⏳ этап 4 |
-| Claude Code | по желанию | ⏳ |
+| Remote - WSL | Windows | ✅ |
+| Remote - SSH | Windows | ✅ |
+| YAML (Red Hat) | Windows + WSL | ✅ |
+| GitLens | Windows + WSL | ✅ |
+| Claude Code | Windows (в WSL — ⏳ проверить) | ✅ |
+
+Настройки (`settings.json`): `files.eol: "\n"`, `files.insertFinalNewline: true`, `files.trimTrailingWhitespace: true`. Папке `~` в WSL выдано доверие (Workspace Trust).
 
 ## 5.6. Инструменты DevOps (план, этап 7)
 
